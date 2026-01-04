@@ -1,108 +1,137 @@
 import { useState } from "react";
 
-const CustomerProfile = () => {
-  const [isEdit, setIsEdit] = useState(false);
-
-  const [customer, setCustomer] = useState({
-    name: "Rahul Sharma",
-    email: "rahul@gmail.com",
-    address: "Pune",
-    phone: "9876543210"
+const CustomerDashboard = () => {
+  const [complaint, setComplaint] = useState({
+    title: "",
+    description: "",
+    file: null,
   });
 
   const handleChange = (e) => {
-    setCustomer({
-      ...customer,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSave = () => {
-    setIsEdit(false);
-    console.log("Updated Data:", customer);
-    alert("Profile Updated");
+    setComplaint({ ...complaint, [e.target.name]: e.target.value });
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
+    <div className="container my-4">
 
-        <div className="col-md-5">
-          <div className="card shadow border-0 rounded-4">
+      {/* HEADER */}
+      <h3 className="mb-4 text-primary">
+        Customer Dashboard
+      </h3>
 
-            <div className="card-header bg-dark text-white text-center">
-              <h4 className="mb-0">My Profile</h4>
+      <div className="row g-4">
+
+        {/* BOX 1 : RAISE COMPLAINT */}
+        <div className="col-md-6">
+          <div className="card border-primary shadow-sm">
+            <div className="card-header bg-primary text-white">
+              Raise New Complaint
             </div>
+            <div className="card-body">
 
-            <div className="card-body p-4">
-
-              {/* Name */}
               <div className="mb-3">
-                <label className="form-label fw-semibold">Name</label>
+                <label className="form-label">Complaint Title</label>
                 <input
                   type="text"
-                  name="name"
+                  name="title"
                   className="form-control"
-                  value={customer.name}
                   onChange={handleChange}
-                  disabled={!isEdit}
                 />
               </div>
 
-              {/* Email */}
               <div className="mb-3">
-                <label className="form-label fw-semibold">Email</label>
-                <input
-                  type="email"
-                  name="email"
+                <label className="form-label">Description</label>
+                <textarea
+                  name="description"
                   className="form-control"
-                  value={customer.email}
+                  rows="3"
                   onChange={handleChange}
-                  disabled={!isEdit}
-                />
+                ></textarea>
               </div>
 
-              {/* Phone */}
               <div className="mb-3">
-                <label className="form-label fw-semibold">Phone</label>
-                <input
-                  type="text"
-                  name="phone"
-                  className="form-control"
-                  value={customer.phone}
-                  onChange={handleChange}
-                  disabled={!isEdit}
-                />
+                <label className="form-label">Upload File (optional)</label>
+                <input type="file" className="form-control" />
               </div>
 
-              {/* Address */}
-              <div className="mb-4">
-                <label className="form-label fw-semibold">Address</label>
-                <input
-                  type="text"
-                  name="address"
-                  className="form-control"
-                  value={customer.address}
-                  onChange={handleChange}
-                  disabled={!isEdit}
-                />
-              </div>
+              <button className="btn btn-primary w-100">
+                Submit Complaint
+              </button>
 
-              {!isEdit ? (
-                <button
-                  className="btn btn-primary w-100"
-                  onClick={() => setIsEdit(true)}
-                >
-                  Edit Profile
-                </button>
-              ) : (
-                <button
-                  className="btn btn-success w-100"
-                  onClick={handleSave}
-                >
-                  Save Changes
-                </button>
-              )}
+            </div>
+          </div>
+        </div>
+
+        {/* BOX 2 : MY COMPLAINTS */}
+        <div className="col-md-6">
+          <div className="card border-success shadow-sm">
+            <div className="card-header bg-success text-white">
+              My Complaints
+            </div>
+            <div className="card-body p-0">
+
+              <table className="table table-bordered mb-0">
+                <thead className="table-light">
+                  <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Staff</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>101</td>
+                    <td>Login Issue</td>
+                    <td>
+                      <span className="badge bg-warning text-dark">
+                        In-Progress
+                      </span>
+                    </td>
+                    <td>Rahul</td>
+                  </tr>
+                  <tr>
+                    <td>102</td>
+                    <td>Payment Failed</td>
+                    <td>
+                      <span className="badge bg-success">
+                        Resolved
+                      </span>
+                    </td>
+                    <td>Neha</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+        {/* BOX 3 : REPLY / REMARK */}
+        <div className="col-12">
+          <div className="card border-dark shadow-sm">
+            <div className="card-header bg-dark text-white">
+              Ticket Remark / Reply
+            </div>
+            <div className="card-body">
+
+              <p>
+                <strong>Ticket ID:</strong> 101 <br />
+                <strong>Status:</strong>
+                <span className="badge bg-warning text-dark ms-2">
+                  In-Progress
+                </span>
+              </p>
+
+              <textarea
+                className="form-control mb-3"
+                rows="3"
+                placeholder="Write your reply here..."
+              ></textarea>
+
+              <button className="btn btn-dark">
+                Send Reply
+              </button>
 
             </div>
           </div>
@@ -113,4 +142,4 @@ const CustomerProfile = () => {
   );
 };
 
-export default CustomerProfile;
+export default CustomerDashboard;

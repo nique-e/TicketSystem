@@ -18,7 +18,6 @@ const Navbar = () => {
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <div className="navbar-nav">
-            <Link className="nav-link" to="/">Register</Link>
             <Link className="nav-link" to="/admin">Admin</Link>
             <Link className="nav-link" to="/customer">Customer</Link>
 
